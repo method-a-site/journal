@@ -1,0 +1,18 @@
+# Site settings:
+title: МЕТОД-А
+url_title: МЕТОД-А | Решения для бизнеса
+baseurl: "" # t he subpath of your site, e.g. /blog
+url: https://method-a.ru # the base hostname & protocol for your site, e.g. http://example.com
+
+# Contact info:
+email: mail@method-a.ru
+phone: +79000005705
+telegram: method_a
+telegram_dm: method_a_dm
+whatsapp: 79000005705
+
+# Build settings:
+collections:
+  articles:
+    output: true
+    permalink: /articles/:path/
