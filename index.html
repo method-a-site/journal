@@ -10,20 +10,20 @@ layout: default
   <div class="slide-section min-h-screen relative z-20 bg-transparent py-12">
     
     <!-- Заголовок "Размышляем" -->
-    <div class="text-center">
-      <h1 class="text-9xl font-bold scale-y-220 -translate-y-full">Размышляем</h1>
-      <h1 class="text-3xl font-medium -translate-y-[150%]">Об обучении, концепциях и подходах</h1>
+  <div class="text-center mt-12 mb-12 md:mt-0 md:mb-0 hidden md:block">
+    <h1 class="text-5xl md:text-9xl font-bold md:scale-y-[2] md:-translate-y-full">Размышляем</h1>
+  <h1 class="text-base md:text-3xl font-medium md:-translate-y-[150%]">Об обучении, концепциях и подходах</h1>
     </div>
 
 
 
     {% for post in site.posts %}
-      <div class="slide-item w-full max-w-5xl mx-auto mb-12 px-4">
+  <div class="slide-item w-full md:max-w-5xl mx-auto mb-12 px-2 sm:px-4">
         <div class="post-card flex flex-col md:flex-row gap-8 items-center p-6 rounded-2xl transition-transform duration-100" style="transform-style: preserve-3d;">
           <!-- Картинка слева -->
           <div class="w-full md:w-1/3 flex-shrink-0 overflow-hidden rounded-2xl">
             {% if post.img_url %}
-              <img src="{{ post.img_url }}" alt="{{ post.title }}" class="parallax-img w-full h-64 md:h-98 object-cover" style="transform: scale(1.1);">
+              <img src="{{ post.img_url }}" alt="{{ post.title }}" class="parallax-img w-full h-82 md:h-98 object-cover" style="transform: scale(1.1);">
             {% else %}
               <div class="w-full h-64 md:h-80 bg-gray-300 rounded-lg flex items-center justify-center">
                 <span class="text-gray-500">Нет изображения</span>
@@ -32,7 +32,7 @@ layout: default
           </div>
           
           <!-- Контент справа -->
-            <div class="w-full md:w-2/3 flex flex-col justify-between h-full px-6">
+            <div class="w-full md:w-2/3 flex flex-col justify-between h-full px-2 sm:px-6">
             <!-- Заголовок -->
             <h2 class="text-3xl md:text-5xl font-semibold mb-4" style="transform: translateX(-2px);">{{ post.title }}</h2>
             
@@ -54,9 +54,9 @@ layout: default
             <p class="text-lg mb-6 leading-relaxed">{{ post.excerpt | strip_html | truncate: 200 }}</p>
             
             <!-- Кнопка и автор -->
-            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div class="flex flex-row items-center justify-between gap-4">
               <a href="{{ post.url | relative_url }}" 
-                class="text-center px-2 sm:px-4 py-1.5 sm:py-2 rounded-full font-medium transition-colors duration-300 text-sm sm:text-base min-w-[120px] cursor-pointer self-start"
+                class="text-center px-2 sm:px-4 py-1.5 sm:py-2 rounded-full font-medium transition-colors duration-300 text-sm sm:text-base min-w-[120px] cursor-pointer"
                 style="background-color: var(--color-hover-current-page); color: var(--color-text-current-page);"
                 onmouseover="this.style.backgroundColor='var(--color-text-current-page)';this.style.color='var(--color-hover-current-page)';"
                 onmouseout="this.style.backgroundColor='var(--color-hover-current-page)';this.style.color='var(--color-text-current-page)';">

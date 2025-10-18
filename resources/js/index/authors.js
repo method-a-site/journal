@@ -1,16 +1,45 @@
+---
+---
 // Список авторов с их аватарами
 const authors = {
-  "Анастасия Меркоева": "https://img.freepik.com/free-photo/androgynous-avatar-non-binary-queer-person_23-2151100226.jpg",
-  "Добрыня Митин": "https://img.freepik.com/free-photo/cartoon-character-with-yellow-jacket-sunglasses_71767-101.jpg",
-  "Валерий Подрядный": "https://img.freepik.com/premium-photo/cheerful-cartoon-girl-with-braids-sunglasses-backpack_1410957-56764.jpg",
-  "Кристина Ожова": "https://img.freepik.com/premium-photo/smiling-cartoon-man-with-glasses_1410957-103401.jpg",
-  "Иван Петров": "https://img.freepik.com/premium-photo/smiling-cartoon-man-with-glasses_1410957-103408.jpg",
-  "Яков Многолетний": "https://res.cloudinary.com/duhygs5ck/image/upload/f_auto,q_auto/v1740646396/avatar4.jpg",
+  "Анастасия Меркоева": "{{ site.data_url }}/data/team/people/owner.png",
+  "Мила Васильева": "{{ site.data_url }}/data/team/people/Mila.png",
+  "Антонина Гарновская": "{{ site.data_url }}/data/team/people/Tonya.png",
+  "Александр Сабельников": "{{ site.data_url }}/data/team/people/Alex.png",
+  "Юлия Гладких": "{{ site.data_url }}/data/team/people/Julia.png",
 };
 
 // Функция для получения аватара автора
 function getAuthorAvatar(authorName) {
-  return authors[authorName] || "https://img.freepik.com/free-photo/androgynous-avatar-non-binary-queer-person_23-2151100205.jpg"; // аватар по умолчанию
+  return authors[authorName] || null; // нет аватара по умолчанию
+}
+
+// Функция сокращения имени автора для мобильных устройств
+function truncateAuthorForMobile(element, fullName) {
+  const nameParts = fullName.split(' ');
+  
+  if (nameParts.length >= 2) {
+    const firstName = nameParts[0];
+    const lastName = nameParts[nameParts.length - 1];
+    const shortName = `${firstName} ${lastName.charAt(0)}.`;
+    
+    // Функция обновления имени в зависимости от размера экрана
+    function updateAuthorName() {
+      // Находим текстовый узел (исключая avatar img)
+      const textNode = Array.from(element.childNodes).find(node => node.nodeType === Node.TEXT_NODE);
+      if (textNode) {
+        if (window.innerWidth < 768) { // md breakpoint
+          textNode.textContent = shortName;
+        } else {
+          textNode.textContent = fullName;
+        }
+      }
+    }
+    
+    // Обновляем при загрузке и изменении размера
+    updateAuthorName();
+    window.addEventListener('resize', updateAuthorName);
+  }
 }
 
 // Инициализация аватаров после загрузки DOM
@@ -21,13 +50,19 @@ document.addEventListener('DOMContentLoaded', function() {
     const authorName = element.dataset.author;
     const avatarUrl = getAuthorAvatar(authorName);
     
-    // Создаем элемент аватара
-    const avatar = document.createElement('img');
-    avatar.src = avatarUrl;
-    avatar.alt = `${authorName} avatar`;
-    avatar.className = 'w-8 h-8 rounded-full object-cover flex-shrink-0 mr-2';
+    // Создаем элемент аватара только если есть URL
+    if (avatarUrl) {
+      const avatar = document.createElement('img');
+      avatar.src = avatarUrl;
+      avatar.alt = `${authorName} avatar`;
+      avatar.className = 'w-8 h-8 rounded-full object-cover flex-shrink-0 mr-2';
+      
+      // Вставляем аватар в начало элемента
+      element.insertBefore(avatar, element.firstChild);
+    }
     
-    // Вставляем аватар в начало элемента
-    element.insertBefore(avatar, element.firstChild);
+    // Применяем сокращение имени для мобильных
+    truncateAuthorForMobile(element, authorName);
   });
 });
+
