@@ -2,31 +2,58 @@
 layout: default
 ---
 
-<div class="area">
-  <ul class="circles">
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-  </ul>
-</div>
+<!-- Секция с фоном и слайдами -->
+<div class="relative w-full">   
 
-<div id="login-container" class="fixed inset-0 w-screen h-screen flex items-center justify-center z-10 p-3">
-  <div class="bg-white/40 backdrop-blur-md p-4 md:p-8 rounded-xl w-full max-w-xs md:max-w-md lg:max-w-lg mx-auto text-center"
-    style="backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);">
-    <h2 id="greeting-title" class="text-lg md:text-2xl font-semibold mb-4 md:mb-6">&nbsp;</h2>
-    <input id="login-user" type="text" placeholder="Логин" class="w-full mb-3 md:mb-4 px-3 md:px-4 py-2 md:py-3 rounded-full text-sm md:text-base focus:outline-none bg-white/60 backdrop-blur-sm" />
-    <input id="login-pass" type="password" placeholder="Пароль" class="w-full mb-3 md:mb-4 px-3 md:px-4 py-2 md:py-3 rounded-full text-sm md:text-base focus:outline-none bg-white/60 backdrop-blur-sm" />
-    <button onclick="loginCheck()" class="w-full mt-3 md:mt-4 py-2 md:py-3 rounded-full transition-all duration-200 bg-[var(--color-text-current-page)] text-[var(--color-hover-current-page)] hover:bg-[var(--color-hover-current-page)] hover:text-[var(--color-text-current-page)] font-medium text-sm md:text-base cursor-pointer">Войти</button>
-    <div id="login-error" class="text-red-600 mt-3 md:mt-4 text-xs md:text-sm hidden">Неверный логин или пароль</div>
+  <div class="background-blend absolute top-0 left-0 w-full h-full z-10"></div>
+
+  <div class="slide-section min-h-screen relative z-20 bg-transparent py-12">
+    
+    <!-- Заголовок "Размышляем" -->
+    <div class="text-center">
+      <h1 class="text-9xl font-bold scale-y-220 -translate-y-full">Размышляем</h1>
+      <h1 class="text-3xl font-medium -translate-y-[150%]">Об обучении, концепциях и подходах</h1>
+    </div>
+
+    
+
+    {% for post in site.posts %}
+      <div class="slide-item w-full max-w-5xl mx-auto mb-12 px-4">
+        <div class="flex flex-col md:flex-row gap-8 items-center bg-white/10 backdrop-blur-sm rounded-lg p-6">
+          <!-- Картинка слева -->
+          <div class="w-full md:w-1/3 flex-shrink-0">
+            {% if post.img_url %}
+              <img src="{{ post.img_url }}" alt="{{ post.title }}" class="w-full h-64 md:h-80 object-cover rounded-lg">
+            {% else %}
+              <div class="w-full h-64 md:h-80 bg-gray-300 rounded-lg flex items-center justify-center">
+                <span class="text-gray-500">Нет изображения</span>
+              </div>
+            {% endif %}
+          </div>
+          
+          <!-- Контент справа -->
+          <div class="w-full md:w-2/3 flex flex-col justify-between h-full">
+            <!-- Заголовок -->
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">{{ post.title }}</h2>
+            
+            <!-- Краткое содержание -->
+            <p class="text-lg mb-6 leading-relaxed">{{ post.excerpt | strip_html | truncate: 200 }}</p>
+            
+            <!-- Кнопка и автор -->
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <a href="{{ post.url | relative_url }}" class="inline-block px-6 py-3 bg-white text-black font-semibold rounded hover:bg-gray-200 transition self-start">
+                Читать
+              </a>
+              {% if post.author %}
+                <p class="text-sm">{{ post.author }}</p>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+      
   </div>
+
+  <div style="height:80vh"></div>
 </div>
-
-
-<script src="/resources/js/login.js"></script>

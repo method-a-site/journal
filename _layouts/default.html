@@ -4,17 +4,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
     <title>{{ site.url_title }}</title>
-    <link rel="stylesheet" href="/resources/style.css">
+    <link rel="stylesheet" href="/resources/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     {% if page.layout == "read" %}
-      {% include head_bar_read.html %}
+      {% include head/read.html %}
     {% else %}
-      {% include head_bar_default.html %}
+      {% include head/default.html %}
     {% endif %}
   </head>
 
-  <body style="background-color: var(--color-background); color: var(--color-logo);">
+  <body style="background-color: var(--color-background-top);">
     {% include ya_metrika.html %}
     {% include name_bar.html %}
 
@@ -26,7 +28,7 @@
 
     {{ content }}
 
-    <script src="/resources/main.js"></script>
+    <script src="/resources/js/main.js"></script>
     <script src="/resources/js/smooth-scroll.js"></script>
   </body>
 </html>

@@ -10,7 +10,7 @@ function toggleHeart(button) {
     // Add liked class
     button.classList.add('liked');
     // Force red color directly
-    button.style.color = 'var(--color-bottun-pressed)';
+    button.style.color = '#ef4444';
     console.log('Added liked class and forced red color');
     
     // Heart bounce animation

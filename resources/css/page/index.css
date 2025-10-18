@@ -1,0 +1,13 @@
+:root {
+  /* Градиент фона */
+  --color-background-top: #E9FFE8;
+
+  /* Навигационная панель */
+  --color-hover-current-page: #0F1D07;
+  --color-text-current-page: #90F188;
+}
+
+body {
+  color: #0F1D07; /* Цвет текста */
+  overflow-x: hidden;
+}
