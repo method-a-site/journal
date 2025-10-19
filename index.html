@@ -7,82 +7,139 @@ layout: default
 
   <div class="background-blend absolute top-0 left-0 w-full h-full z-10"></div>
 
-  <div class="slide-section min-h-screen relative z-20 bg-transparent py-12">
+  
+  <div class="slide-section relative z-20 bg-transparent" data-bg="var(--color-background-top)">
     
+
     <!-- Заголовок "Размышляем" -->
-  <div class="text-center mt-12 mb-12 md:mt-0 md:mb-0 hidden md:block">
-    <h1 class="text-5xl md:text-9xl font-bold md:scale-y-[2] md:-translate-y-full">Размышляем</h1>
-  <h1 class="text-base md:text-3xl font-medium md:-translate-y-[150%]">Об обучении, концепциях и подходах</h1>
-    </div>
+  <div class="text-center mt-12 mb-12 md:mt-0 md:mb-0">
+    <h1 class="text-5xl md:text-9xl font-bold md:scale-y-[2] md:-translate-y-full hidden md:block">Размышляем</h1>
+    <h1 class="text-base md:text-3xl font-medium md:-translate-y-[150%] hidden md:block">Об обучении, концепциях и подходах</h1>
+  </div>
 
-
-
-    {% for post in site.posts %}
+  {% for post in paginator.posts %}
   <div class="slide-item w-full md:max-w-5xl mx-auto mb-12 px-2 sm:px-4">
-        <div class="post-card flex flex-col md:flex-row gap-8 items-center p-6 rounded-2xl transition-transform duration-100" style="transform-style: preserve-3d;">
-          <!-- Картинка слева -->
-          <div class="w-full md:w-1/3 flex-shrink-0 overflow-hidden rounded-2xl">
-            {% if post.img_url %}
-              <img src="{{ post.img_url }}" alt="{{ post.title }}" class="parallax-img w-full h-82 md:h-98 object-cover" style="transform: scale(1.1);">
-            {% else %}
-              <div class="w-full h-64 md:h-80 bg-gray-300 rounded-lg flex items-center justify-center">
-                <span class="text-gray-500">Нет изображения</span>
-              </div>
-            {% endif %}
+    <div class="post-card flex flex-col md:flex-row gap-8 items-center p-6 rounded-2xl transition-transform duration-100" style="transform-style: preserve-3d;">
+      <!-- Картинка слева -->
+      <div class="w-full md:w-1/3 flex-shrink-0 overflow-hidden rounded-2xl">
+        {% if post.img_url %}
+          <img src="{{ post.img_url }}" alt="{{ post.title }}" class="parallax-img w-full h-82 md:h-98 object-cover" style="transform: scale(1.1);">
+        {% else %}
+          <div class="w-full h-64 md:h-80 bg-gray-300 rounded-lg flex items-center justify-center">
+            <span class="text-gray-500">Нет изображения</span>
           </div>
-          
-          <!-- Контент справа -->
-            <div class="w-full md:w-2/3 flex flex-col justify-between h-full px-2 sm:px-6">
-            <!-- Заголовок -->
-            <h2 class="text-3xl md:text-5xl font-semibold mb-4" style="transform: translateX(-2px);">{{ post.title }}</h2>
-            
-            <!-- Теги -->
-            {% if post.tags and post.tags.size > 0 %}
-            <div class="flex items-center flex-wrap gap-2 mb-4">
-              {% for tag in post.tags %}
-                <span class="text-sm font-medium opacity-70">{{ tag }}</span>
-                {% unless forloop.last %}
-                  <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="#B488F1" viewBox="0 0 13 13" class="flex-shrink-0" style="color: rgb(180, 136, 241);">
-                    <path fill="currentColor" d="m7.124 4.995 2.919-2.92.882.883-2.92 2.918h4.13v1.248h-4.13l2.92 2.919-.882.881-2.919-2.919v4.128H5.877V8.005l-2.919 2.92-.882-.883 2.92-2.918H.867V5.876h4.126L2.076 2.958l.882-.882 2.919 2.919V.867h1.247z"></path>
-                  </svg>
-                {% endunless %}
-              {% endfor %}
+        {% endif %}
+      </div>
+      <!-- Контент справа -->
+      <div class="w-full md:w-2/3 flex flex-col h-full px-2 sm:px-6">
+        <!-- Заголовок -->
+        <h2 class="text-3xl md:text-5xl font-semibold mb-4" style="transform: translateX(-2px);">{{ post.title }}</h2>
+        <!-- Теги -->
+        {% if post.tags and post.tags.size > 0 %}
+        <div class="flex items-center flex-wrap gap-2 mb-4">
+          {% for tag in post.tags %}
+            <span class="text-sm font-medium opacity-70">{{ tag }}</span>
+            {% unless forloop.last %}
+              <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="#B488F1" viewBox="0 0 13 13" class="flex-shrink-0" style="color: rgb(180, 136, 241);">
+                <path fill="currentColor" d="m7.124 4.995 2.919-2.92.882.883-2.92 2.918h4.13v1.248h-4.13l2.92 2.919-.882.881-2.919-2.919v4.128H5.877V8.005l-2.919 2.92-.882-.883 2.92-2.918H.867V5.876h4.126L2.076 2.958l.882-.882 2.919 2.919V.867h1.247z"></path>
+              </svg>
+            {% endunless %}
+          {% endfor %}
+        </div>
+        {% endif %}
+        <!-- Краткое содержание -->
+        <p class="text-lg mb-6 leading-relaxed">{{ post.excerpt | strip_html | truncate: 200 }}</p>
+        <!-- Кнопка и автор -->
+        <div class="flex flex-row items-center justify-between gap-4 mt-auto">
+          <a href="{{ post.url | relative_url }}" 
+            class="text-center px-2 sm:px-4 py-1.5 sm:py-2 rounded-full font-medium transition-colors duration-300 text-sm sm:text-base min-w-[120px] cursor-pointer"
+            style="background-color: var(--color-hover-current-page); color: var(--color-text-current-page);"
+            onmouseover="this.style.backgroundColor='var(--color-text-current-page)';this.style.color='var(--color-hover-current-page)';"
+            onmouseout="this.style.backgroundColor='var(--color-hover-current-page)';this.style.color='var(--color-text-current-page)';">
+            Читать
+            <span class="inline-flex items-center justify-center w-4 h-4 ml-1 align-middle">
+              <svg id="arrow-svg" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 12 12">
+                <path fill="currentColor" d="M1.5 6a.75.75 0 0 1 .75-.75h5.94L6.22 3.28a.75.75 0 0 1 1.06-1.06l3.25 3.25a.75.75 0 0 1 0 1.06L7.28 9.78a.75.75 0 0 1-1.06-1.06l1.97-1.97H2.25A.75.75 0 0 1 1.5 6Z"/>
+              </svg>
+            </span>
+          </a>
+          {% if post.author %}
+            <div class="author-info flex items-center text-sm font-medium" data-author="{{ post.author }}">
+              {{ post.author }}
             </div>
-            {% endif %}
-            
-            <!-- Краткое содержание -->
-            <p class="text-lg mb-6 leading-relaxed">{{ post.excerpt | strip_html | truncate: 200 }}</p>
-            
-            <!-- Кнопка и автор -->
-            <div class="flex flex-row items-center justify-between gap-4">
-              <a href="{{ post.url | relative_url }}" 
-                class="text-center px-2 sm:px-4 py-1.5 sm:py-2 rounded-full font-medium transition-colors duration-300 text-sm sm:text-base min-w-[120px] cursor-pointer"
-                style="background-color: var(--color-hover-current-page); color: var(--color-text-current-page);"
-                onmouseover="this.style.backgroundColor='var(--color-text-current-page)';this.style.color='var(--color-hover-current-page)';"
-                onmouseout="this.style.backgroundColor='var(--color-hover-current-page)';this.style.color='var(--color-text-current-page)';">
-                Читать
-                  <span class="inline-flex items-center justify-center w-4 h-4 ml-1 align-middle">
-                    <svg id="arrow-svg" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 12 12">
-                      <path fill="currentColor" d="M1.5 6a.75.75 0 0 1 .75-.75h5.94L6.22 3.28a.75.75 0 0 1 1.06-1.06l3.25 3.25a.75.75 0 0 1 0 1.06L7.28 9.78a.75.75 0 0 1-1.06-1.06l1.97-1.97H2.25A.75.75 0 0 1 1.5 6Z"/>
-                    </svg>
-                  </span>
-              </a>
-
-              {% if post.author %}
-                <div class="author-info flex items-center text-sm font-medium" data-author="{{ post.author }}">
-                  {{ post.author }}
-                </div>
-              {% endif %}
-              
-            </div>
-          </div>
-
+          {% endif %}
         </div>
       </div>
-    {% endfor %}
+    </div>
+  </div>
+  {% endfor %}
 
-      
+  <!-- Пагинация -->
+  {% if paginator.total_pages > 1 %}
+  <div class="w-full md:max-w-5xl mx-auto px-2 sm:px-4 mt-12 mb-18 md:mb-8">
+    <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-4">
+      {% if paginator.previous_page %}
+        <a href="{{ paginator.previous_page_path | relative_url }}" 
+           class="hidden md:block px-6 py-2 rounded-full font-medium transition-colors duration-300 border border-transparent min-w-[120px] text-center"
+           style="background-color: var(--color-hover-current-page); color: var(--color-text-current-page);"
+           onmouseover="this.style.backgroundColor='var(--color-text-current-page)';this.style.color='var(--color-hover-current-page)';"
+           onmouseout="this.style.backgroundColor='var(--color-hover-current-page)';this.style.color='var(--color-text-current-page)';">
+          ← Предыдущая
+        </a>
+      {% endif %}
+
+      <div class="flex space-x-2">
+        {% for page in (1..paginator.total_pages) %}
+          {% if page == paginator.page %}
+            <span class="px-3 py-2 rounded-full font-medium min-w-[40px] text-center border"
+                  style="background-color: var(--color-text-current-page); color: var(--color-hover-current-page); border-color: var(--color-text-current-page);">
+              {{ page }}
+            </span>
+          {% elsif page == 1 %}
+            <a href="{{ site.baseurl }}/" 
+               class="px-3 py-2 rounded-full font-medium transition-all duration-300 opacity-70 hover:opacity-100 min-w-[40px] text-center border"
+               style="color: var(--color-logo); border-color: var(--color-hover-current-page);"
+               onmouseover="this.style.backgroundColor='var(--color-text-current-page)'; this.style.color='var(--color-hover-current-page)'; this.style.borderColor='transparent';"
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='var(--color-logo)'; this.style.borderColor='var(--color-hover-current-page)';">
+              {{ page }}
+            </a>
+          {% else %}
+            <a href="{{ site.paginate_path | relative_url | replace: ':num', page }}" 
+               class="px-3 py-2 rounded-full font-medium transition-all duration-300 opacity-70 hover:opacity-100 min-w-[40px] text-center border"
+               style="color: var(--color-logo); border-color: var(--color-hover-current-page);"
+               onmouseover="this.style.backgroundColor='var(--color-text-current-page)'; this.style.color='var(--color-hover-current-page)'; this.style.borderColor='transparent';"
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='var(--color-logo)'; this.style.borderColor='var(--color-hover-current-page)';">
+              {{ page }}
+            </a>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+      {% if paginator.next_page %}
+        <a href="{{ paginator.next_page_path | relative_url }}" 
+           class="hidden md:block px-6 py-2 rounded-full font-medium transition-colors duration-300 border border-transparent min-w-[120px] text-center"
+           style="background-color: var(--color-hover-current-page); color: var(--color-text-current-page);"
+           onmouseover="this.style.backgroundColor='var(--color-text-current-page)';this.style.color='var(--color-hover-current-page)';"
+           onmouseout="this.style.backgroundColor='var(--color-hover-current-page)';this.style.color='var(--color-text-current-page)';">
+          Следующая →
+        </a>
+      {% endif %}
+    </div>
+  </div>
+  {% endif %}
+
+
   </div>
 
   <div style="height:80vh"></div>
 </div>
+
+{% include footer.html %}
+
+<script src="/resources/js/index/main-background.js"></script>
+<script src="/resources/js/smooth-scroll.js"></script>
+<script src="/resources/js/index/words.js"></script>
+<script src="/resources/js/index/authors.js"></script>
+<script src="/resources/js/index/tilt-effect.js"></script>
+<script src="/resources/js/index/parallax-effect.js"></script>
+
