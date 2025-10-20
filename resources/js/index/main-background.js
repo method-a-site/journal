@@ -23,10 +23,10 @@ document.addEventListener('DOMContentLoaded', function() {
   const tl = gsap.timeline({
     scrollTrigger: {
       trigger: thirdSlide,
-      start: "top center",
-      end: "bottom top",
+      start: "bottom-=200px center",
+      end: "bottom center",
       scrub: true,
-      //markers: true
+      markers: true
     }
   });
 
