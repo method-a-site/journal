@@ -29,7 +29,8 @@ def extract_tags_from_posts
 end
 
 def create_tag_page(tag)
-  tag_dir = File.join(TAG_DIR, tag)
+  tag_dir_name = tag.downcase
+  tag_dir = File.join(TAG_DIR, tag_dir_name)
   FileUtils.mkdir_p(tag_dir)
   
   index_file = File.join(tag_dir, 'index.html')
@@ -98,6 +99,13 @@ end
 def main
   puts "🚀 Генерация страниц тегов для GitHub Pages"
   puts "=" * 50
+  
+  # Удаляем существующие теги и создаем папку заново
+  if Dir.exist?(TAG_DIR)
+    puts "\n🗑️  Удаление существующих тегов..."
+    FileUtils.rm_rf(TAG_DIR)
+    puts "✅ Папка #{TAG_DIR} очищена"
+  end
   
   # Создаем основную папку тегов
   FileUtils.mkdir_p(TAG_DIR)
