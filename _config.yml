@@ -12,6 +12,12 @@ data_url: https://data.method-a.ru
 # Пагинация
 plugins:
   - jekyll-paginate
+  - jekyll-tagging
 
 paginate: 5
 paginate_path: "/page/:num/"
+
+# Настройки тегов
+tag_permalink_style: pretty
+tag_page_layout: tag_page
+tag_page_dir: tag
