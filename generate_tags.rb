@@ -53,7 +53,7 @@ def create_tag_page(tag)
             <h1 class="text-base md:text-3xl font-medium md:-translate-y-[150%] hidden md:block">Об обучении, концепциях и подходах</h1>
           
           <!-- Кнопка возврата -->
-          <div class="mt-8 mb-4">
+          <div class="md:mt-4 mt-26 mb-8">
             <a href="{{ site.baseurl }}/" 
                class="px-4 py-2 rounded-full font-medium transition-colors duration-300 border border-transparent"
                style="background-color: var(--color-hover-current-page); color: var(--color-text-current-page);"
@@ -62,7 +62,7 @@ def create_tag_page(tag)
               Все статьи
             </a>
             {% assign filtered_posts = site.posts | where_exp: "post", "post.tags contains '#{tag}'" %}
-            <span class="ml-4 text-sm opacity-70">Найдено статей: {{ filtered_posts.size }}</span>
+            <span class="ml-4 text-sm opacity-70">Найдено: {{ filtered_posts.size }}</span>
           </div>
         </div>
 
