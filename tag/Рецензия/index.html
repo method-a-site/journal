@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Статьи по тегу: Образование"
+title: "Статьи по тегу: Рецензия"
 ---
 
 <!-- Секция с фоном и слайдами -->
@@ -11,7 +11,7 @@ title: "Статьи по тегу: Образование"
     
     <!-- Заголовок тега -->
     <div class="text-center mt-12 mb-12 md:mb-0">
-      <h1 class="text-5xl md:text-9xl font-bold md:scale-y-[2.25] md:-translate-y-full hidden md:block">Образование</h1>
+      <h1 class="text-5xl md:text-9xl font-bold md:scale-y-[2.25] md:-translate-y-full hidden md:block">Рецензия</h1>
       <h1 class="text-base md:text-3xl font-medium md:-translate-y-[150%] hidden md:block">Статьи по теме</h1>
       
       <!-- Кнопка возврата -->
@@ -23,12 +23,12 @@ title: "Статьи по тегу: Образование"
            onmouseout="this.style.backgroundColor='var(--color-hover-current-page)';this.style.color='var(--color-text-current-page)';">
           ← Все статьи
         </a>
-        {% assign filtered_posts = site.posts | where_exp: "post", "post.tags contains 'Образование'" %}
+        {% assign filtered_posts = site.posts | where_exp: "post", "post.tags contains 'Рецензия'" %}
         <span class="ml-4 text-sm opacity-70">Найдено статей: {{ filtered_posts.size }}</span>
       </div>
     </div>
 
-    {% assign filtered_posts = site.posts | where_exp: "post", "post.tags contains 'Образование'" %}
+    {% assign filtered_posts = site.posts | where_exp: "post", "post.tags contains 'Рецензия'" %}
     
     {% if filtered_posts.size > 0 %}
       {% for post in filtered_posts %}
