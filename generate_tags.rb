@@ -49,8 +49,8 @@ def create_tag_page(tag)
         
         <!-- Заголовок тега -->
         <div class="text-center mt-12 mb-12 md:mb-0">
-          <h1 class="text-5xl md:text-9xl font-bold md:scale-y-[2.25] md:-translate-y-full hidden md:block">#{tag}</h1>
-          <h1 class="text-base md:text-3xl font-medium md:-translate-y-[150%] hidden md:block">Статьи по теме</h1>
+            <h1 class="text-5xl md:text-9xl font-bold md:scale-y-[2.25] md:-translate-y-full hidden md:block">Размышляем</h1>
+            <h1 class="text-base md:text-3xl font-medium md:-translate-y-[150%] hidden md:block">Об обучении, концепциях и подходах</h1>
           
           <!-- Кнопка возврата -->
           <div class="mt-8 mb-4">
@@ -59,7 +59,7 @@ def create_tag_page(tag)
                style="background-color: var(--color-hover-current-page); color: var(--color-text-current-page);"
                onmouseover="this.style.backgroundColor='var(--color-text-current-page)';this.style.color='var(--color-hover-current-page)';"
                onmouseout="this.style.backgroundColor='var(--color-hover-current-page)';this.style.color='var(--color-text-current-page)';">
-              ← Все статьи
+              Все статьи
             </a>
             {% assign filtered_posts = site.posts | where_exp: "post", "post.tags contains '#{tag}'" %}
             <span class="ml-4 text-sm opacity-70">Найдено статей: {{ filtered_posts.size }}</span>
