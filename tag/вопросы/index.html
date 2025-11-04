@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Статьи по тегу: Интервью"
+title: "Статьи по тегу: Вопросы"
 ---
 
 <!-- Секция с фоном и слайдами -->
@@ -23,12 +23,12 @@ title: "Статьи по тегу: Интервью"
            onmouseout="this.style.backgroundColor='var(--color-hover-current-page)';this.style.color='var(--color-text-current-page)';">
           Все статьи
         </a>
-        {% assign filtered_posts = site.posts | where_exp: "post", "post.tags contains 'Интервью'" %}
+        {% assign filtered_posts = site.posts | where_exp: "post", "post.tags contains 'Вопросы'" %}
         <span class="ml-4 text-sm opacity-70">Найдено: {{ filtered_posts.size }}</span>
       </div>
     </div>
 
-    {% assign filtered_posts = site.posts | where_exp: "post", "post.tags contains 'Интервью'" %}
+    {% assign filtered_posts = site.posts | where_exp: "post", "post.tags contains 'Вопросы'" %}
     
     {% if filtered_posts.size > 0 %}
       {% for post in filtered_posts %}
