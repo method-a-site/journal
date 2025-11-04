@@ -31,7 +31,17 @@
         </div>
         {% endif %}
         <!-- Краткое содержание -->
-        <p class="text-lg mb-6 leading-relaxed">{{ post.excerpt | strip_html | truncate: 200 }}</p>
+        {% assign content_html = post.content | markdownify | strip_html %}
+        {% assign content_lines = content_html | split: '. ' %}
+        {% assign excerpt_text = '' %}
+        {% for line in content_lines %}
+          {% unless line contains post.title %}
+            {% if excerpt_text == '' %}
+              {% assign excerpt_text = line %}
+            {% endif %}
+          {% endunless %}
+        {% endfor %}
+        <p class="text-lg mb-6 leading-relaxed">{{ excerpt_text | strip | truncate: 200 }}</p>
         <!-- Кнопка и автор -->
         <div class="flex flex-row items-center justify-between gap-4 mt-auto">
           <a href="{{ post.url | relative_url }}" 
