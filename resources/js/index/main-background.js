@@ -17,14 +17,15 @@ document.addEventListener('DOMContentLoaded', function() {
   // scrub-animation background-blend - появляется при скролле 4 секции
   const scaleVal = 0.95;
   const yBlendVal = "-70vh";
+  const ySlideVal = ((1 - scaleVal) * 50) + "vh";
   const slideSections = document.querySelectorAll('.slide-section');
   const thirdSlide = slideSections[0];
 
   const tl = gsap.timeline({
     scrollTrigger: {
       trigger: thirdSlide,
-      start: "bottom-=200px center",
-      end: "bottom center",
+      start: "bottom center",
+      end: "+=200",
       scrub: true,
       //markers: true
     }
@@ -40,5 +41,9 @@ document.addEventListener('DOMContentLoaded', function() {
   }, 0)
   .to(bgBottom, {
     opacity: 1
+  }, 0)
+  .to(thirdSlide, {
+    scale: scaleVal,
+    y: "-" + ySlideVal,
   }, 0);
 });
